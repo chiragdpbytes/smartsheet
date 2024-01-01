@@ -1,17 +1,17 @@
 // create dashboard page component
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './index.scss';
+import UserListing from "./UserListing";
+import { ToastProvider } from 'react-toast-notifications';
 
 const Dashboard = () => {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-12 text-center">
-          <h1>Dashboard</h1>
-          <Link to="/">Go Home</Link>
-        </div>
-      </div>
-    </div>
+    <section>
+      <ToastProvider>
+        <UserListing />
+      </ToastProvider>
+    </section>
   );
 };
 

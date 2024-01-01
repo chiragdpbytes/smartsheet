@@ -1,0 +1,110 @@
+@import "Variable.scss";
+
+/* Custom Font Face Style */
+/* Figtree Font Family */
+@font-face {
+  font-family: "Figtree";
+  src: url("../assets/fonts/Figtree-Light.eot");
+  src: url("../assets/fonts/Figtree-Light.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Figtree-Light.woff2") format("woff2"),
+    url("../assets/fonts/Figtree-Light.woff") format("woff"),
+    url("../assets/fonts/Figtree-Light.ttf") format("truetype"),
+    url("../assets/fonts/Figtree-Light.svg#Figtree-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("../assets/fonts/Figtree-Regular.eot");
+  src: url("../assets/fonts/Figtree-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Figtree-Regular.woff2") format("woff2"),
+    url("../assets/fonts/Figtree-Regular.woff") format("woff"),
+    url("../assets/fonts/Figtree-Regular.ttf") format("truetype"),
+    url("../assets/fonts/Figtree-Regular.svg#Figtree-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("../assets/fonts/Figtree-Medium.eot");
+  src: url("../assets/fonts/Figtree-Medium.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Figtree-Medium.woff2") format("woff2"),
+    url("../assets/fonts/Figtree-Medium.woff") format("woff"),
+    url("../assets/fonts/Figtree-Medium.ttf") format("truetype"),
+    url("../assets/fonts/Figtree-Medium.svg#Figtree-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("../assets/fonts/Figtree-SemiBold.eot");
+  src: url("../assets/fonts/Figtree-SemiBold.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Figtree-SemiBold.woff2") format("woff2"),
+    url("../assets/fonts/Figtree-SemiBold.woff") format("woff"),
+    url("../assets/fonts/Figtree-SemiBold.ttf") format("truetype"),
+    url("../assets/fonts/Figtree-SemiBold.svg#Figtree-SemiBold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("../assets/fonts/Figtree-Bold.eot");
+  src: url("../assets/fonts/Figtree-Bold.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Figtree-Bold.woff2") format("woff2"),
+    url("../assets/fonts/Figtree-Bold.woff") format("woff"),
+    url("../assets/fonts/Figtree-Bold.ttf") format("truetype"),
+    url("../assets/fonts/Figtree-Bold.svg#Figtree-Bold") format("svg");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Figtree";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-weight: 400;
+  color: $Font_Primary;
+  font-size: 16px;
+  line-height: 2;
+  font-style: normal;
+  background-color: $white;
+  margin: 0;
+  padding-right: 0px !important;
+  @include scrollbar($Placeholder_Text, $gray_extra_light);
+  overflow-y: auto;
+}
+
+header,
+section {
+  max-width: 1440px;
+  padding: 0px 16px;
+  margin: 0 auto;
+}
+
+header {
+  .title {
+    text-transform: uppercase;
+  }
+}

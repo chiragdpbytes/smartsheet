@@ -1,6 +1,5 @@
 import React from 'react';
 import './config/axios.config';
-import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouting from './routing/AppRouting';
 

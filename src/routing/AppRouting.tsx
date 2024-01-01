@@ -20,7 +20,6 @@ const AppRouting = () => {
       <Route path="/" element={<PublicLayout />}>
         <Route path="/" index element={<Login />} />
         <Route path="/login" element={<Login />} />
-
       </Route>
       {/* Public route end */}
 

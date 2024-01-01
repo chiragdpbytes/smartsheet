@@ -8,18 +8,17 @@ import ButtonSubmit from '../../components/Button/ButtonSubmit';
 const Login = () => {
 
   // state for email and password
-  const [username, setUsername] = useState<string>('kminchelle');
-  const [password, setPassword] = useState<string>('0lelplR');
+  const [username, setUsername] = useState<string>('smartsheet');
+  const [password, setPassword] = useState<string>('Test@123');
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
 
   // submit handler
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login({ username: username, password: password })).then((response: any) => {
-      localStorage.setItem('token', response.payload.token);
+      localStorage.setItem('token', response?.payload?.token);
       navigate('/dashboard');
     }).catch((err: any) => {
       console.log('Login submit err', err);

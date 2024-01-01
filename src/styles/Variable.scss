@@ -1,0 +1,72 @@
+// Color Variables
+$black: #000000;
+$white: #ffffff;
+$Light_White: #f8f9fa;
+$Accent: #8a6fab;
+$Font_Primary: #181f2a;
+$Secondary_Text: #616773;
+$gray_extra_light: #f4f4f4;
+$Border: #e2e4e8;
+$Error: #e22a34;
+$Blue_Primary: #e45017;
+$Placeholder_Text: #8b93a1;
+$Light_Accent: #fef6f3;
+$Light_Text_BG: #f8f9fa;
+$Dark_BG: #4d4e4e;
+$In_progress: #ed8a00;
+$Secondary_light: #fbf9ff;
+$Light_Progress: #fffae5;
+$Light_Success: #e9fdf2;
+$Light_Blue: #dfe0df;
+$Light_Error: #fdeeef;
+$Pending: #fba320;
+$Approved: #2aad6c;
+$Rejected: #e43131;
+$white_light: #fafafa;
+$Blue_dark: #714ff6;
+$Blue_light: #f3effb;
+$Red_light: #f3effb;
+$Green_dark: #377E36;
+$Green_light: #E0F0E4;
+$Default: #66CB9F;
+$Type_20percentage: rgb(24 31 42 / 20%);
+
+// Custom Scrollbar Mixins
+@mixin scrollbar($thumb, $track) {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track;
+  } 
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $Light_Blue;
+    border-radius: 6px;
+    border: 0px solid $track;
+  }
+}
+
+// SCREEN SIZES AND BREAKPOINTS
+$screen-xs-min: 480px !default; // Extra-small screen / phone
+$screen-sm-min: 768px !default; // Small screen / tablet
+$screen-md-min: 1025px !default; // Medium screen / desktop
+$screen-lg-min: 1366px !default; // Large screen / wide desktop
+$screen-xl-min: 1600px !default; // Large screen devices
+$screen-xxl-min: 1800px !default; // Large screen devices
+
+// Provide a maximum so media queries do not overlap when required
+$screen-xxs-max: ($screen-xs-min - 1) !default; // Below from 479px
+$screen-xs-max: ($screen-sm-min - 1) !default; // Below from 767px
+$screen-sm-max: ($screen-md-min - 1) !default; // Below from 1024px
+$screen-991: (991px) !default; // Below from 991px
+$screen-1199: (1199px) !default; // Below from 1199px
+$screen-md-max: ($screen-lg-min - 1) !default; // Below from 1365px
+$screen-lg-max: ($screen-xl-min - 1) !default; // Below from 1599px
+$screen-xl-max: 1800px !default; // Below from 1799px
