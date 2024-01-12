@@ -53,9 +53,7 @@ const UserListing = () => {
                             ) : (
                                 <img src={PlaceholderImg} alt={data[0]?.name} height={84} width={84} />
                             )}
-                            {data?.length ? (
-                                data[0]?.name
-                            ) : ('No Winner Found')}
+                            {data[0]?.name}
                         </div>
                     </div>
                     <div className='winner-text'>WINNER</div>
