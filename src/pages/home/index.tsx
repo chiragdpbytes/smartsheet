@@ -13,10 +13,13 @@ const Home = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     fetchData();
+    setLoading(false);
 }, []);
 
 useEffect(() => {
+  setLoading(true);
   const refSite = document.referrer;
   console.log('document.referrer', document.referrer);
   if (data.length > 0 && refSite) {
@@ -27,11 +30,12 @@ useEffect(() => {
       setError('You are not allowed to access this website');
     }
   }
-  setLoading(true);
+  setLoading(false);
 }, [data]);
 
 
 const fetchData = async () => {
+  setLoading(true);
     try {
         const response = await apiService.get('/whitelist-website');
         if(response.data.statusCode === 200){
@@ -40,6 +44,7 @@ const fetchData = async () => {
     } catch (error) {
         console.error('Error fetching data:', error);
     }
+    setLoading(false);
 };
   return (
     <>
@@ -48,6 +53,11 @@ const fetchData = async () => {
           error ? (
             <div className="error">
               <p>{error}</p>
+            </div>
+          ) : 
+          loading ? (
+            <div className="loading">
+              <p>Loading...</p>
             </div>
           ) : (
             <UserListing />
