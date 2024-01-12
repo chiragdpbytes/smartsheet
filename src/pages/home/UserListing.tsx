@@ -20,11 +20,8 @@ const UserListing = () => {
 
     const fetchData = async () => {
         try {
-            // debugger;
             const response = await apiService.get('/users/findOneRep');
             setData(response.data.data);
-            console.log("response.data.data =>", response.data.data);
-
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -56,7 +53,9 @@ const UserListing = () => {
                             ) : (
                                 <img src={PlaceholderImg} alt={data[0]?.name} height={84} width={84} />
                             )}
-                            {data[0]?.name}
+                            {data?.length ? (
+                                data[0]?.name
+                            ) : ('No Winner Found')}
                         </div>
                     </div>
                     <div className='winner-text'>WINNER</div>
@@ -64,39 +63,55 @@ const UserListing = () => {
                     <i className='pattern-icon'><PatternIcon /></i>
                 </div>
 
-                <div className='table-wrapper'>
-                    <table className='custom-table'>
-                        {/* Render table headers */}
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        {/* Render table rows with data */}
-                        <tbody>
-                            {data?.length ? (
-                                <>
+                {data?.length ? (
+                    <>
+                        {data?.length >= 2 && (
+                            <>
+                                <div className='table-wrapper'>
+                                    <table className='custom-table'>
+                                        {/* Render table headers */}
+                                        <thead>
+                                            <tr>
+                                                <th>Rank</th>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        {/* Render table rows with data */}
+                                        <tbody>
 
-                                    {data.slice(1).map((item, index) => (
-                                        <tr key={item?.id}>
-                                            <td>{item?.rank}</td>
-                                            <td>
-                                                <div className='user-detail'>
-                                                    {
-                                                        item?.imageUrl ? (
-                                                            <img src={process.env.REACT_APP_API_URL + "/users/image/" + item?.imageUrl} alt={item?.name} height={40} width={40} />
-                                                        ) : (
-                                                            <img src={PlaceholderImg} alt={item?.name} height={40} width={40} />
-                                                        )
-                                                    }{item?.name}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </>
-                            ) : (
-                                <>
+                                            {data.slice(1).map((item, index) => (
+                                                <tr key={item?.id}>
+                                                    <td>{item?.rank}</td>
+                                                    <td>
+                                                        <div className='user-detail'>
+                                                            {
+                                                                item?.imageUrl ? (
+                                                                    <img src={process.env.REACT_APP_API_URL + "/users/image/" + item?.imageUrl} alt={item?.name} height={40} width={40} />
+                                                                ) : (
+                                                                    <img src={PlaceholderImg} alt={item?.name} height={40} width={40} />
+                                                                )
+                                                            }{item?.name}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </>
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <div className='table-wrapper'>
+                            <table className='custom-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <td><Skeleton /></td>
                                         <td><Skeleton /></td>
@@ -109,11 +124,11 @@ const UserListing = () => {
                                         <td><Skeleton /></td>
                                         <td><Skeleton /></td>
                                     </tr>
-                                </>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </>
+                )}
 
             </div>
         </div>
