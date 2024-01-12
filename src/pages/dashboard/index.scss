@@ -25,6 +25,25 @@ header {
     }
 }
 
+.add-website-action{
+    .button{
+        margin: 0 0 16px auto;
+    }
+}
+
+.addedit-form{
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+    align-items: flex-end;
+    .form-control{
+        margin-bottom: 0;
+    }
+    .button{
+        height: 48px;
+    }
+}
+
 table.custom-table {
     border-collapse: separate;
     border-spacing: 0;

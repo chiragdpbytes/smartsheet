@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { UploadIcon } from "../../assets/icons/collection/UploadIcon";
 import '../dashboard/index.scss';
 import apiService from "../../api-config/services/Rap.service";
+import { EditIcon } from "../../assets/icons/collection/EditIcon";
+import { DeleteIcon } from "../../assets/icons/collection/DeleteIcon";
 
 const WebsiteManager = () => {
 
@@ -113,13 +115,12 @@ const WebsiteManager = () => {
         {
           showAddForm && (
 
-            <div className='add-form'>
+            <div className='addedit-form'>
               <div className='form-control'>
                 <label>Website Name</label>
                 <input type='text' placeholder='Enter website name' value={websiteName} onChange={(e) => setWebsiteName(e.target.value)} />
               </div>
 
-              <div className='btn-action'>
                 <Button
                   type="button"
                   onClick={() => handleAddWebsite()}
@@ -132,7 +133,6 @@ const WebsiteManager = () => {
                   title="Cancel"
                   style="purple-light"
                 />
-              </div>
             </div>
 
           )
@@ -141,13 +141,12 @@ const WebsiteManager = () => {
         {
           showEditForm && (
 
-            <div className='add-form'>
+            <div className='addedit-form'>
               <div className='form-control'>
                 <label>Website Name</label>
                 <input type='text' placeholder='Enter website name' value={websiteName} onChange={(e) => setWebsiteName(e.target.value)} />
               </div>
 
-              <div className='btn-action'>
                 <Button
                   type="button"
                   onClick={() => handleUpdateWebsite()}
@@ -160,22 +159,21 @@ const WebsiteManager = () => {
                   title="Cancel"
                   style="purple-light"
                 />
-              </div>
             </div>
-
           )
         }
 
         {
           !showAddForm && !showEditForm &&
           <>
-            <div className='breadcrumb'>
+            <div className='add-website-action'>
               <Button
                 onClick={() => setShowAddForm(true)}
                 title="Add Website"
                 style="purple-dark"
               />
             </div>
+
             <table className='custom-table'>
               {/* Render table headers */}
               <thead>
@@ -191,15 +189,10 @@ const WebsiteManager = () => {
                     <tr key={index}>
                       <td>{item.websiteHostName}</td>
                       <td>
-                        <Button
-                          title="Edit"
-                          style="purple-dark"
-                          onClick={() => handleEditWebsite(item)}
-                        />
-                        <Button
-                          title="Delete"
-                          onClick={() => handleDeleteWebsite(item._id)}
-                        />
+                        <div className='actions'>
+                          <div onClick={() => handleEditWebsite(item)} title='Edit Website'><EditIcon color='green' size='18' /></div>
+                          <div onClick={() => handleDeleteWebsite(item._id)} title='Delete Website'><DeleteIcon size='18' /></div>
+                        </div>
                       </td>
                     </tr>
                   ))
