@@ -6,6 +6,7 @@ import PrivateLayout from "./layout/PrivateLayout";
 import PublicLayout from "./layout/PublicLayout";
 import Login from "../pages/auth/Login";
 import Home from "../pages/home";
+import WebsiteManager from "../pages/website-manager";
 
 const AppRouting = () => {
 
@@ -18,6 +19,7 @@ const AppRouting = () => {
       {/* Private route start */}
       <Route path="/" element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/website-manager" element={<WebsiteManager />} />
 
         <Route path="/home" element={<Home />} />
       </Route>
