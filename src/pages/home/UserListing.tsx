@@ -11,6 +11,7 @@ import { PatternIcon } from '../../assets/icons/collection/PatternIcon';
 
 const UserListing = () => {
     const [data, setData] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const logoutBtnRef = useRef<any>();
     const token = localStorage.getItem("token");
 
@@ -22,8 +23,10 @@ const UserListing = () => {
         try {
             const response = await apiService.get('/users/findOneRep');
             setData(response.data.data);
+            setIsLoading(false);
         } catch (error) {
             console.error('Error fetching data:', error);
+            setIsLoading(false);
         }
     };
 
@@ -101,33 +104,36 @@ const UserListing = () => {
                     </>
                 ) : (
                     <>
-                        <div className='table-wrapper'>
-                            <table className='custom-table'>
-                                <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><Skeleton /></td>
-                                        <td><Skeleton /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><Skeleton /></td>
-                                        <td><Skeleton /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><Skeleton /></td>
-                                        <td><Skeleton /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    {
+                        isLoading && (
+                            <div className='table-wrapper'>
+                                <table className='custom-table'>
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><Skeleton /></td>
+                                            <td><Skeleton /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><Skeleton /></td>
+                                            <td><Skeleton /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><Skeleton /></td>
+                                            <td><Skeleton /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        )
+                    }
                     </>
                 )}
-
             </div>
         </div>
     )
