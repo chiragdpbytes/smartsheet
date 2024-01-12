@@ -1,0 +1,355 @@
+@import "/src/styles/Variable.scss";
+
+.form-control {
+  position: relative;
+  margin-bottom: 24px;
+
+  .input-label {
+    color: $black;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    line-height: 100%;
+    margin-bottom: 16px;
+    display: block;
+
+    span {
+      padding-left: 2px;
+      color: $Error;
+    }
+
+    +.additional-link {
+      position: absolute;
+      right: 0px;
+      top: 2px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      color: $Blue_Primary;
+    }
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="file"],
+  input[type="image"],
+  input[type="password"],
+  input[type="reset"],
+  input[type="search"],
+  input[type="radio"],
+  textarea {
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 14px;
+    color: $black;
+    border: 1px solid $Border;
+    font-family: "Inter";
+    position: relative;
+    z-index: 1;
+
+    &.transparent {
+      border-color: transparent;
+      background: transparent;
+    }
+
+    &:focus {
+      border-color: $Accent;
+    }
+
+    &.issuffix {
+      padding-right: 115px;
+      background-color: transparent;
+    }
+
+    &.common-input.visible {
+      -webkit-text-security: none !important;
+      writing-mode: unset !important;
+    }
+  }
+
+  input:-internal-autofill-selected {
+    background-color: transparent !important;
+    z-index: 0;
+  }
+
+  &.password-filed {
+    &.not-valid {
+      margin-bottom: 60px;
+    }
+
+    .common-input {
+      -webkit-text-security: disc !important;
+      writing-mode: horizontal-tb !important;
+      padding-right: 33px;
+    }
+
+    .error-message {
+      white-space: unset;
+      bottom: auto;
+      top: 100%;
+      line-height: 1;
+      font-size: 13px;
+    }
+  }
+
+  textarea {
+    height: auto;
+    resize: vertical;
+    max-height: 150px;
+    min-height: 48px;
+  }
+
+  ::placeholder {
+    color: $Placeholder_Text;
+    font-size: 14px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &.alignbottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    padding-bottom: 11px;
+  }
+
+  .toggle-visible {
+    position: absolute;
+    right: 5px;
+    top: 42px;
+    z-index: 2;
+    padding: 0px 5px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.3s;
+
+    svg {
+      transition: all 0.3s;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 21px;
+      background-color: #2d2e2e;
+      left: 13px;
+      top: 4px;
+      transform: rotate(-45deg);
+      opacity: 1;
+      transition: all 0.3s;
+    }
+
+    &.visible {
+      opacity: 1;
+
+      svg {
+        transform: rotateX(180deg);
+      }
+
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.custom-select {
+  width: 100%;
+  // z-index: 2;
+  font-weight: 400;
+
+  >div {
+    border-radius: 0px;
+    border-color: $Border;
+    height: 48px;
+
+    &:hover {
+      border-color: $Border;
+    }
+
+    &.css-t3ipsp-control {
+      // border-color: $Accent;
+      box-shadow: none;
+    }
+
+    >div:first-child {
+      padding: 2px 0px 2px 16px;
+
+      >div:first-child {
+        text-overflow: unset;
+        font-size: 14px;
+        margin: 0px;
+        font-weight: 400;
+
+        &#react-select-2-placeholder {
+          color: $Placeholder_Text;
+        }
+      }
+
+      >div:last-child {
+        input {
+          height: 36px;
+        }
+      }
+
+      +div {
+        width: 25px;
+
+        span {
+          display: none;
+        }
+
+        >div {
+          padding: 8px 3px;
+          transform: rotate(90deg);
+
+          svg {
+            width: 11px;
+          }
+        }
+      }
+    }
+  }
+
+  > :nth-last-child(2),
+  >.css-103yzqr-control {
+    box-shadow: none !important;
+    border-color: $Accent;
+  }
+
+  >.css-1nmdiq5-menu {
+    width: 100%;
+    margin-right: 1px;
+    border: 1px solid $Border;
+    box-shadow: none;
+    height: auto;
+    z-index: 3;
+
+    >div {
+      padding: 0px !important;
+      background-color: $white;
+
+      >div {
+        font-size: 14px !important;
+        padding: 3px 8px !important;
+      }
+    }
+  }
+}
+
+.input-suffix {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  height: 46px;
+  padding: 9px 16px;
+  background: $Blue_light;
+  font-size: 14px;
+  line-height: 2;
+  min-width: 105px;
+  z-index: 0;
+}
+
+.input-preffix {
+  position: absolute;
+  left: 21px;
+  bottom: 12px;
+  background: transparent;
+  font-size: 14px;
+  line-height: 2;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+}
+
+.error-message {
+  color: $Error;
+  position: absolute;
+  left: 0;
+  bottom: -24px;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.custom-checkbox {
+  display: inline-block;
+
+  input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+
+    &:checked+label:after {
+      opacity: 1;
+    }
+
+    &:checked+label:before {
+      border-color: $Accent;
+    }
+  }
+
+  &.check-design {
+    label {
+      &::after {
+        top: 1px !important;
+        left: 5px !important;
+        width: 4px !important;
+        height: 9px !important;
+        border: solid $Accent;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        background: transparent;
+      }
+    }
+  }
+
+  label {
+    position: relative;
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      background-color: transparent;
+      border: 1px solid $Border;
+      height: 22px;
+      width: 22px;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      cursor: pointer;
+      margin-right: 7px;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 6px;
+      left: 7px;
+      width: 10px;
+      height: 10px;
+      background: $Accent;
+      border-radius: 2px;
+      transition: all 0.3s;
+      opacity: 0;
+    }
+  }
+}

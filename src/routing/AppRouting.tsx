@@ -5,23 +5,32 @@ import NotFound from "../pages/NotFound";
 import PrivateLayout from "./layout/PrivateLayout";
 import PublicLayout from "./layout/PublicLayout";
 import Login from "../pages/auth/Login";
+import Home from "../pages/home";
 
 const AppRouting = () => {
 
   return (
     <Routes>
+
+      <Route index element={<Home />} />
+      <Route path="/home" element={<Home />} />
+
       {/* Private route start */}
       <Route path="/" element={<PrivateLayout />}>
-        <Route path="/dashboard" index element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/home" element={<Home />} />
       </Route>
       {/* Private route end */}
 
       {/* Public route start */}
-      <Route path="/" element={<PublicLayout />}>
-        <Route path="/" index element={<Login />} />
-        <Route path="/login" element={<Login />} />
-      </Route>
+      {/* <Route path="/" element={<PublicLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+      </Route> */}
       {/* Public route end */}
+
+      <Route path="/login" element={<Login />} />
 
       {/* Not found route start */}
       <Route path="*" element={<NotFound />} />

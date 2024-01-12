@@ -1,67 +1,58 @@
 @import "Variable.scss";
 
 /* Custom Font Face Style */
-/* Figtree Font Family */
+/* Inter Font Family */
 @font-face {
-  font-family: "Figtree";
-  src: url("../assets/fonts/Figtree-Light.eot");
-  src: url("../assets/fonts/Figtree-Light.eot?#iefix") format("embedded-opentype"),
-    url("../assets/fonts/Figtree-Light.woff2") format("woff2"),
-    url("../assets/fonts/Figtree-Light.woff") format("woff"),
-    url("../assets/fonts/Figtree-Light.ttf") format("truetype"),
-    url("../assets/fonts/Figtree-Light.svg#Figtree-Light") format("svg");
-  font-weight: 300;
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Regular.eot");
+  src: url("../assets/fonts/Inter-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/Inter-Regular.woff2") format("woff2"),
+    url("../assets/fonts/Inter-Regular.woff") format("woff"),
+    url("../assets/fonts/Inter-Regular.ttf") format("truetype"),
+    url("../assets/fonts/Inter-Regular.svg#Inter-Regular") format("svg");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Figtree";
-  src: url("../assets/fonts/Figtree-Regular.eot");
-  src: url("../assets/fonts/Figtree-Regular.eot?#iefix") format("embedded-opentype"),
-    url("../assets/fonts/Figtree-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Figtree-Regular.woff") format("woff"),
-    url("../assets/fonts/Figtree-Regular.ttf") format("truetype"),
-    url("../assets/fonts/Figtree-Regular.svg#Figtree-Regular") format("svg");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Figtree";
-  src: url("../assets/fonts/Figtree-Medium.eot");
-  src: url("../assets/fonts/Figtree-Medium.eot?#iefix") format("embedded-opentype"),
-    url("../assets/fonts/Figtree-Medium.woff2") format("woff2"),
-    url("../assets/fonts/Figtree-Medium.woff") format("woff"),
-    url("../assets/fonts/Figtree-Medium.ttf") format("truetype"),
-    url("../assets/fonts/Figtree-Medium.svg#Figtree-Medium") format("svg");
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Medium.eot");
+  src: url("../assets/fonts/Inter-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/Inter-Medium.woff2") format("woff2"),
+    url("../assets/fonts/Inter-Medium.woff") format("woff"),
+    url("../assets/fonts/Inter-Medium.ttf") format("truetype"),
+    url("../assets/fonts/Inter-Medium.svg#Inter-Medium") format("svg");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Figtree";
-  src: url("../assets/fonts/Figtree-SemiBold.eot");
-  src: url("../assets/fonts/Figtree-SemiBold.eot?#iefix") format("embedded-opentype"),
-    url("../assets/fonts/Figtree-SemiBold.woff2") format("woff2"),
-    url("../assets/fonts/Figtree-SemiBold.woff") format("woff"),
-    url("../assets/fonts/Figtree-SemiBold.ttf") format("truetype"),
-    url("../assets/fonts/Figtree-SemiBold.svg#Figtree-SemiBold") format("svg");
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-SemiBold.eot");
+  src: url("../assets/fonts/Inter-SemiBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/Inter-SemiBold.woff2") format("woff2"),
+    url("../assets/fonts/Inter-SemiBold.woff") format("woff"),
+    url("../assets/fonts/Inter-SemiBold.ttf") format("truetype"),
+    url("../assets/fonts/Inter-SemiBold.svg#Inter-SemiBold") format("svg");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Figtree";
-  src: url("../assets/fonts/Figtree-Bold.eot");
-  src: url("../assets/fonts/Figtree-Bold.eot?#iefix") format("embedded-opentype"),
-    url("../assets/fonts/Figtree-Bold.woff2") format("woff2"),
-    url("../assets/fonts/Figtree-Bold.woff") format("woff"),
-    url("../assets/fonts/Figtree-Bold.ttf") format("truetype"),
-    url("../assets/fonts/Figtree-Bold.svg#Figtree-Bold") format("svg");
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Bold.eot");
+  src: url("../assets/fonts/Inter-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../assets/fonts/Inter-Bold.woff2") format("woff2"),
+    url("../assets/fonts/Inter-Bold.woff") format("woff"),
+    url("../assets/fonts/Inter-Bold.ttf") format("truetype"),
+    url("../assets/fonts/Inter-Bold.svg#Inter-Bold") format("svg");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -72,20 +63,20 @@
   padding: 0;
   box-sizing: border-box;
   outline: none;
-  font-family: "Figtree";
+  font-family: "Inter";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html,
 body {
-  height: 100%;
+  // height: 100%;
   scroll-behavior: smooth;
 }
 
 body {
   font-weight: 400;
-  color: $Font_Primary;
+  color: $black;
   font-size: 16px;
   line-height: 2;
   font-style: normal;
@@ -96,15 +87,60 @@ body {
   overflow-y: auto;
 }
 
-header,
 section {
-  max-width: 1440px;
+  max-width: 1280px;
   padding: 0px 16px;
   margin: 0 auto;
 }
 
-header {
-  .title {
-    text-transform: uppercase;
+// React Responsive Modal Popup
+.react-responsive-modal-modal {
+  max-height: 90vh !important;
+  width: 937px !important;
+  padding: 0px !important;
+  position: relative;
+  overflow: unset;
+  overflow-y: hidden !important;
+
+  .modal-title {
+    padding: 16px 40px 16px 24px;
+    border-bottom: 1px solid $Border;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $white;
+    z-index: 9;
+  }
+
+  .modal-body {
+    padding: 24px;
+    @include scrollbar($Placeholder_Text, $gray_extra_light);
+    overflow-y: auto;
+    max-height: calc(90vh - 62px) !important;
+
+    .modal-action {
+      display: flex;
+      justify-content: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+
+      .button {
+        padding: 11px 16px;
+      }
+    }
+  }
+
+  .react-responsive-modal-closeButton {
+    top: 22px !important;
+    right: 20px !important;
+    z-index: 10;
+  }
+
+  @media screen and (max-width: $screen-991) {
+    width: calc(100% - 40px) !important;
   }
 }

@@ -1,0 +1,41 @@
+@import "/src/styles/Variable.scss";
+
+.skeleton-div {
+    width: 100%;
+    height: 100%;
+    min-height: 20px;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: #eee;
+    position: relative;
+
+    .shine {
+        position: absolute;
+        top: 0;
+        left: -100px;
+        width: 100px;
+        height: 100%;
+        min-height: 20px;
+        background-image: linear-gradient(120deg, #eee 20%, #f4f4f4 50%, #eee 80%);
+        animation: skeleton-animation 1s ease-in-out infinite;
+        will-change: left;
+
+        &.one {
+            animation-delay: 0ms;
+        }
+
+        &.two {
+            animation-delay: 330ms;
+        }
+
+        &.three {
+            animation-delay: 660ms;
+        }
+    }
+}
+
+@keyframes skeleton-animation {
+    to {
+        left: 100%;
+    }
+}

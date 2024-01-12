@@ -1,0 +1,344 @@
+@import '/src/styles/Variable.scss';
+
+.leaderboard-wrapper {
+    background: repeat url("../../assets/images/leaderboard-bg-img.jpg");
+    height: 100%;
+    padding: 40px 16px;
+    min-height: 100vh;
+    background-size: cover;
+
+    .leaderboard-inner {
+        max-width: 1231px;
+        padding: 0px;
+        margin: 0 auto;
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0px 0px 40px;
+            margin: 0px;
+
+            .title {
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 120%;
+                text-transform: capitalize;
+                color: #383838;
+            }
+
+            .btn-action {
+                display: flex;
+                flex-direction: row;
+                column-gap: 16px;
+
+                >button:nth-child(2) {
+                    svg {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+        }
+
+        .winner-box {
+            display: flex;
+            padding: 32px 38px;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            column-gap: 21px;
+            position: relative;
+            background: no-repeat url("../../assets/images/winner-bg-img.png");
+            border-radius: 16px;
+            overflow: hidden;
+
+            .winner-details {
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                align-items: center;
+                column-gap: 21px;
+
+                .user-detail {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    flex-direction: row;
+                    align-items: center;
+                    column-gap: 18px;
+                    color: #1E1D50;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 120%;
+                    text-transform: capitalize;
+
+                    img {
+                        height: 84px;
+                        width: 84px;
+                        min-width: 84px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        border: 2px solid #ffffff;
+                        object-fit: cover;
+                        overflow-clip-margin: unset;
+                    }
+                }
+            }
+
+            .winner-text {
+                font-size: 74px;
+                font-style: italic;
+                font-weight: 400;
+                line-height: 1;
+                letter-spacing: 16px;
+                text-transform: capitalize;
+                color: $black;
+                opacity: 0.1;
+            }
+
+            .congrets-text {
+                position: absolute;
+                bottom: 21px;
+                right: 60px;
+                font-size: 12px;
+                font-style: italic;
+                font-weight: 400;
+                line-height: 120%;
+                text-transform: capitalize;
+                color: $Green_dark;
+            }
+
+            .pattern-icon {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+
+        .table-wrapper {
+            margin-top: 40px;
+            padding: 0px 62px;
+
+            table.custom-table {
+                border-collapse: separate;
+                border-spacing: 0;
+                width: 100%;
+                background: linear-gradient(105deg, rgba(255, 255, 255, 0.46) -1.07%, rgba(255, 255, 255, 0.26) 100%);
+                box-shadow: 0px 0px 55px 0px #FCE5E8;
+                backdrop-filter: blur(27px);
+                border-radius: 16px;
+
+
+                th,
+                td {
+                    padding: 16px 30px;
+                    line-height: 1.5;
+                }
+
+                th {
+                    background: #F2DCD3;
+                    color: $black;
+                    text-align: left;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 120%;
+                }
+
+                tr:first-child {
+                    th:first-child {
+                        border-top-left-radius: 16px;
+                        width: 15%;
+                        min-width: 80px;
+                        padding-right: 15px;
+                    }
+
+                    th:nth-child(2) {
+                        width: 85%;
+                        min-width: 200px;
+                    }
+
+                    th:last-child {
+                        border-top-right-radius: 16px;
+                        padding-left: 15px;
+                    }
+                }
+
+                td {
+                    border-right: 0px solid $Border;
+                    border-bottom: 1px solid $Border;
+
+                    &:first-child {
+                        border-left: 0px solid $Border;
+                        padding-right: 15px;
+                    }
+
+                    &:last-child {
+                        border-right: 0px solid $Border;
+                        padding-left: 15px;
+                    }
+
+                    .user-detail {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        column-gap: 16px;
+                        font-size: 16px;
+                        font-style: normal;
+                        line-height: 120%;
+                        text-transform: capitalize;
+
+                        img {
+                            height: 40px;
+                            width: 40px;
+                            min-width: 40px;
+                            border-radius: 50%;
+                            overflow: hidden;
+                            border: 2px solid #ffffff;
+                            object-fit: cover;
+                            overflow-clip-margin: unset;
+                        }
+                    }
+
+                    .skeleton-div {
+                        min-height: 26px;
+                    }
+                }
+
+                tr:nth-child(even) {
+                    td {
+                        background: transparent;
+                    }
+                }
+
+                tr:last-child {
+                    td {
+                        border-bottom-width: 0px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $screen-md-max) {
+        .leaderboard-inner {
+            header {
+                .title {
+                    font-size: 38px;
+                }
+            }
+
+            .winner-box {
+                .winner-text {
+                    font-size: 64px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $screen-1199) {
+        .leaderboard-inner {
+            .winner-box {
+                padding: 30px;
+
+                .winner-text {
+                    font-size: 50px;
+                    letter-spacing: 10px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $screen-991) {
+        .leaderboard-inner {
+            .winner-box {
+                .winner-details {
+                    >svg {
+                        width: 60px;
+                    }
+
+                    .user-detail {
+                        font-size: 20px;
+
+                        img {
+                            height: 64px;
+                            width: 64px;
+                            min-width: 64px;
+                        }
+                    }
+                }
+
+                .winner-text {
+                    font-size: 40px;
+                    letter-spacing: 6px;
+                }
+            }
+
+            .table-wrapper {
+                padding: 0px 42px;
+            }
+        }
+    }
+
+    @media screen and (max-width: $screen-xs-max) {
+        .leaderboard-inner {
+            header {
+                .title {
+                    font-size: 30px;
+                }
+            }
+
+            .winner-box {
+                flex-wrap: wrap;
+                padding: 10px 16px 40px;
+
+                .winner-details {
+                    column-gap: 14px;
+
+                    >svg {
+                        width: 46px;
+                    }
+
+                    .user-detail {
+                        font-size: 18px;
+
+                        img {
+                            height: 46px;
+                            width: 46px;
+                            min-width: 46px;
+                        }
+                    }
+                }
+
+                .winner-text {
+                    position: absolute;
+                    right: 20px;
+                    bottom: 25px;
+                    font-size: 31px;
+                    letter-spacing: 5px;
+                }
+
+                .congrets-text {
+                    bottom: 12px;
+                    right: 30px;
+                }
+            }
+
+            .table-wrapper {
+                padding: 0px;
+
+                table{
+                    &.custom-table {
+                        th,
+                        td{
+                            padding: 12px 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

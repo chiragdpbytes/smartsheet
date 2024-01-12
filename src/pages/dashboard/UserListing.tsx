@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import apiService from '../../api-config/services/Rap.service';
 import { useToasts } from 'react-toast-notifications';
 import Modal from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
+import { Button } from '../../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { EditIcon } from '../../assets/icons/collection/EditIcon';
+import { DeleteIcon } from '../../assets/icons/collection/DeleteIcon';
+import { CloseIcon } from '../../assets/icons/collection/CloseIcon';
+import { Skeleton } from '../../components/skeleton/Skeleton';
+import { UploadIcon } from '../../assets/icons/collection/UploadIcon';
+import { RefreshIcon } from '../../assets/icons/collection/RefreshIcon';
+import PlaceholderImg from '../../assets/images/img-placeholder-img.png';
+import CheckmarkImg from '../../assets/images/checkmark-transparent.gif';
 
 const UserListing = () => {
-    const [data, setData] = useState<any[]>([{
-        id: 1,
-        name: 'a',
-        image: 'A.jpg'
-    }, {
-        id: 2,
-        name: 'b',
-        image: 'B.jpg'
-    }, {
-        id: 3,
-        name: 'c',
-        image: 'C.jpg'
-    }, {
-        id: 4,
-        name: 'd',
-        image: 'D.jpg'
-    }]);
+    const [data, setData] = useState<any[]>([]);
+    const logoutBtnRef = useRef<any>();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchData();
@@ -34,16 +30,20 @@ const UserListing = () => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [updatedName, setUpdatedName] = useState('');
     const [updatedImage, setUpdatedImage] = useState<File | null>(null);
+    const [isImage, setIsImage] = useState<File | null>(null);
+    const token = localStorage.getItem("token");
 
     const fetchData = async () => {
-        // debugger;
-        // try {
-        //     const response = await apiService.get('/users/findAllRep');
-        //     setData(response.data);
-        //     console.log("response.data =>", response.data);
-        // } catch (error) {
-        //     console.error('Error fetching data:', error);
-        // }
+        try {
+            const response = await apiService.get('/users/findAllRep', {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            });
+            setData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     };
 
     const handleDelete = async (id: number) => {
@@ -55,15 +55,21 @@ const UserListing = () => {
         if (deletingItemId) {
             try {
                 // Make API call to delete item
-                // await apiService.delete(`/related-table-endpoint/${deletingItemId}`);
+                const data: any = await apiService.delete(`/users/deleteImage/${deletingItemId}`, {
+                    headers: {
+                        Authorization: 'Bearer ' + token
+                    }
+                });
+                if (data?.data?.statusCode === 200) {
+                    fetchData()
+                    addToast('Rep photo deleted successfully', { appearance: 'success', autoDismiss: true });
+                }
 
                 // Remove the deleted item from the local state
-                setData(data.filter(item => item.id !== deletingItemId));
 
-                addToast('Item deleted successfully', { appearance: 'success', autoDismiss: true });
             } catch (error) {
                 console.error('Error deleting item:', error);
-                addToast('Error deleting item', { appearance: 'error', autoDismiss: true });
+                addToast('Error deleting photo', { appearance: 'error', autoDismiss: true });
             } finally {
                 setDeletingItemId(null); // Reset deletingItemId
             }
@@ -71,6 +77,7 @@ const UserListing = () => {
     };
 
     const handleUpdate = (item: any) => {
+        setIsImage(null);
         setSelectedItem(item);
         setUpdatedName(item.name); // Initialize input fields with existing data
         setIsUpdateModalOpen(true);
@@ -81,9 +88,10 @@ const UserListing = () => {
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // debugger
         if (e.target.files && e.target.files.length > 0) {
             setUpdatedImage(e.target.files[0]);
-            console.log(updatedImage);
+            setIsImage(e.target.files[0]);
         }
     };
 
@@ -94,19 +102,20 @@ const UserListing = () => {
                 const formData = new FormData();
                 formData.append('name', updatedName);
                 if (updatedImage) {
-                    formData.append('image', updatedImage.name);
+                    formData.append('file', updatedImage);
                 }
 
                 // Make API call to update item
-                // await apiService.put(`/related-table-endpoint/${selectedItem.id}`, formData);
+                const data: any = await apiService.post(`/users/updateImage`, formData, {
+                    headers: {
+                        Authorization: 'Bearer ' + token
+                    }
+                });
+                if (data?.data?.statusCode === 200) {
+                    fetchData();
+                }
 
-                // Update the local state with the new data
-                const updatedData = data.map(item =>
-                    item.id === selectedItem.id ? { ...item, name: updatedName, image: updatedImage } : item
-                );
-                setData(updatedData);
-
-                addToast('Item updated successfully', { appearance: 'success', autoDismiss: true });
+                addToast('Rep photo updated successfully', { appearance: 'success', autoDismiss: true });
                 setIsUpdateModalOpen(false);
             } catch (error) {
                 console.error('Error updating item:', error);
@@ -117,36 +126,85 @@ const UserListing = () => {
         }
     };
 
+    const handleLogout = () => {
+        navigate("/login");
+        localStorage.clear();
+    };
+
     return (
         <>
+            <header>
+                <h1 className='title'>Smartsheet </h1>
+
+                <div className='btn-action'>
+                    <Button
+                        ref={logoutBtnRef}
+                        onClick={() => fetchData()}
+                        title="Refresh"
+                        style="purple-dark"
+                        icons={<RefreshIcon color='#ffffff' />}
+                    />
+                    <Button
+                        ref={logoutBtnRef}
+                        onClick={handleLogout}
+                        title="Logout"
+                        style="purple-light"
+                        icons={<UploadIcon color='#8a6fab' size='16' />}
+                    />
+                </div>
+            </header>
             <table className='custom-table'>
                 {/* Render table headers */}
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Image</th>
+                        <th>Rep Name</th>
+                        <th>Rep Photo</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 {/* Render table rows with data */}
                 <tbody>
-                    {data.length ? (
+                    {data?.length ? (
                         data.map((item) => (
                             <tr key={item.id}>
                                 <td>{item.name}</td>
                                 <td>
-                                    <img src={item.image} alt={item.name} />
+                                    <div className='image'>
+                                    {
+                                        item.imageUrl ? (
+                                            <img src={process.env.REACT_APP_API_URL + "/users/image/" + item.imageUrl} alt={item.name} />
+                                        ) : (
+                                            <img  crossOrigin='anonymous' src={PlaceholderImg} alt={item.name} height={56} width={72} />
+                                        )
+                                    }
+                                    </div>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleUpdate(item)}>Update</button>
-                                    <button onClick={() => handleDelete(item.id)}>Delete</button>
+                                    <div className='actions'>
+                                        <div onClick={() => handleUpdate(item)} title='Update Rep Photo'><EditIcon color='green' size='18' /></div>
+                                        <div onClick={() => handleDelete(item._id)} title='Delete Rep Photo' className={`${!item.imageUrl ? 'disable' : ''}`}><DeleteIcon size='18' /></div>
+                                    </div>
                                 </td>
                             </tr>
                         ))
                     ) : (
-                        <tr>
-                            <td colSpan={3}>No user data found</td>
-                        </tr>
+                        <>
+                            <tr>
+                                <td><Skeleton /></td>
+                                <td><Skeleton /></td>
+                                <td><Skeleton /></td>
+                            </tr>
+                            <tr>
+                                <td><Skeleton /></td>
+                                <td><Skeleton /></td>
+                                <td><Skeleton /></td>
+                            </tr>
+                            <tr>
+                                <td><Skeleton /></td>
+                                <td><Skeleton /></td>
+                                <td><Skeleton /></td>
+                            </tr>
+                        </>
                     )}
                 </tbody>
             </table>
@@ -154,25 +212,106 @@ const UserListing = () => {
             {/* Confirmation Modal */}
             {deletingItemId !== null && (
                 <>
-                <Modal open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} center>
-                    <div className="confirmation-modal">
-                        <p>Are you sure you want to delete this record?</p>
-                        <button onClick={() => setDeletingItemId(null)}>Cancel</button>
-                        <button onClick={confirmDelete}>Confirm</button>
-                    </div>
-                </Modal>
+                    <Modal
+                        open={isDeleteModalOpen}
+                        onClose={() => setIsDeleteModalOpen(false)}
+                        center
+                        closeIcon={<CloseIcon />}
+                        classNames={{
+                            overlay: 'customOverlay',
+                            modal: 'deletimg-popup',
+                        }}
+                    >
+                        <h2 className="modal-title">Are you sure you want to delete Rep Photo?</h2>
+                        <div className={`modal-body `}>
+                            <div className='action-btn modal-action'>
+                                <Button
+                                    onClick={() => setDeletingItemId(null)}
+                                    title='Cancel'
+                                    style='gray-light'
+                                />
+                                <Button
+                                    onClick={confirmDelete}
+                                    title='Confirm'
+                                    style='purple-dark'
+                                />
+                            </div>
+                        </div>
+                    </Modal>
                 </>
             )}
 
             {/* Update Modal */}
-            <Modal open={isUpdateModalOpen} onClose={() => setIsUpdateModalOpen(false)} center>
-                <h2>Update Item</h2>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" value={updatedName} onChange={handleNameChange} />
-                <label htmlFor="image">Image:</label>
-                <input type="file" id="image" onChange={handleImageChange} />
-                <button onClick={handleUpdateSubmit}>Update</button>
-                <button onClick={() => setIsUpdateModalOpen(false)}>Cancel</button>
+            <Modal
+                open={isUpdateModalOpen}
+                onClose={() => setIsUpdateModalOpen(false)}
+                center
+                closeIcon={<CloseIcon />}
+                classNames={{
+                    overlay: 'customOverlay',
+                    modal: '',
+                }}
+            >
+                <h2 className="modal-title">Update Rep Photo</h2>
+                <div className={`modal-body `}>
+                    <div className='form-content'>
+                        <div className={`form-control`}>
+                            <label className="input-label" htmlFor="name">Rep Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                placeholder="Enter Name"
+                                // onChange={handleNameChange}
+                                ref={null}
+                                value={updatedName}
+                                className={`common-input`}
+                                disabled={true}
+                            />
+                        </div>
+                        <div className="file-upload-wrapper">
+                            <label className="input-label" htmlFor="image">Rep Photo</label>
+                            <div className="file-upload-wrap">
+                                <label>
+                                    <div className="">
+                                        {isImage ? (
+                                            <img
+                                            src={CheckmarkImg}
+                                            alt="Image Uploaded"
+                                            width="33"
+                                            height="30"
+                                            className="mb-4"
+                                          />
+                                        ) : <UploadIcon size='30' /> }
+                                        <p className="label">{isImage ? updatedImage?.name : 'Drop Photo or a Click Here'}</p>
+                                        {!isImage && <p className="label-note">Max Size 5 MB Only</p> }
+                                    </div>
+
+                                    <input
+                                        id="image"
+                                        type="file"
+                                        name="image"
+                                        accept="image/jpg, image/png, image/jpeg"
+                                        onChange={handleImageChange}
+                                    />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='action-btn modal-action'>
+                        <Button
+                            onClick={() => setIsUpdateModalOpen(false)}
+                            title='Cancel'
+                            style='gray-light'
+                        />
+                        <Button
+                            onClick={handleUpdateSubmit}
+                            title='Update'
+                            style='purple-dark'
+                        />
+                    </div>
+                </div>
             </Modal>
         </>
     )
