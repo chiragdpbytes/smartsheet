@@ -22,7 +22,7 @@ export const Button = forwardRef((props: ButtonProps, ref) => {
       disabled={props.disable || loading || false}
       type={props.type || "button"}
     >
-      <span className={loading ? "loader" : ""}></span>
+      {/* <span className={loading ? "loader" : ""}></span> */}
       {props.icons}
       {props.title || props.children}
     </button>

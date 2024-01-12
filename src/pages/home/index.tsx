@@ -21,7 +21,7 @@ useEffect(() => {
   console.log('document.referrer', document.referrer);
   if (data.length > 0 && refSite) {
     const isWhitelisted = data.some((item) => {
-      return refSite.includes(item.domain);
+      return refSite.includes(item.websiteHostName);
     });
     if (!isWhitelisted) {
       setError('You are not allowed to access this website');

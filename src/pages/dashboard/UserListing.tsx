@@ -139,6 +139,12 @@ const UserListing = () => {
                 <div className='btn-action'>
                     <Button
                         ref={logoutBtnRef}
+                        onClick={() => navigate('/website-manager')}
+                        title="Website Manager"
+                        style="purple-dark"
+                    />
+                    <Button
+                        ref={logoutBtnRef}
                         onClick={() => fetchData()}
                         title="Refresh"
                         style="purple-dark"
